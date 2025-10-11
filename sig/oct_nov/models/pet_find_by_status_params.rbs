@@ -1,0 +1,40 @@
+module OctNov
+  module Models
+    type pet_find_by_status_params =
+      { status: OctNov::Models::PetFindByStatusParams::status }
+      & OctNov::Internal::Type::request_parameters
+
+    class PetFindByStatusParams < OctNov::Internal::Type::BaseModel
+      extend OctNov::Internal::Type::RequestParameters::Converter
+      include OctNov::Internal::Type::RequestParameters
+
+      attr_reader status: OctNov::Models::PetFindByStatusParams::status?
+
+      def status=: (
+        OctNov::Models::PetFindByStatusParams::status
+      ) -> OctNov::Models::PetFindByStatusParams::status
+
+      def initialize: (
+        ?status: OctNov::Models::PetFindByStatusParams::status,
+        ?request_options: OctNov::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        status: OctNov::Models::PetFindByStatusParams::status,
+        request_options: OctNov::RequestOptions
+      }
+
+      type status = :available | :pending | :sold
+
+      module Status
+        extend OctNov::Internal::Type::Enum
+
+        AVAILABLE: :available
+        PENDING: :pending
+        SOLD: :sold
+
+        def self?.values: -> ::Array[OctNov::Models::PetFindByStatusParams::status]
+      end
+    end
+  end
+end

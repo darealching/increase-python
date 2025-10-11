@@ -1,0 +1,7 @@
+module OctNov
+  module Models
+    type store_list_inventory_response = ::Hash[Symbol, Integer]
+
+    StoreListInventoryResponse: OctNov::Internal::Type::Converter
+  end
+end

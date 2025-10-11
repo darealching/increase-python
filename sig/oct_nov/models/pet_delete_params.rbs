@@ -1,0 +1,14 @@
+module OctNov
+  module Models
+    type pet_delete_params = {  } & OctNov::Internal::Type::request_parameters
+
+    class PetDeleteParams < OctNov::Internal::Type::BaseModel
+      extend OctNov::Internal::Type::RequestParameters::Converter
+      include OctNov::Internal::Type::RequestParameters
+
+      def initialize: (?request_options: OctNov::request_opts) -> void
+
+      def to_hash: -> { request_options: OctNov::RequestOptions }
+    end
+  end
+end

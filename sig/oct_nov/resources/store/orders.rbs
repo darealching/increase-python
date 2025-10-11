@@ -1,0 +1,29 @@
+module OctNov
+  module Resources
+    class Store
+      class Orders
+        def create: (
+          ?id: Integer,
+          ?complete: bool,
+          ?pet_id: Integer,
+          ?quantity: Integer,
+          ?ship_date: Time,
+          ?status: OctNov::Models::Order::status,
+          ?request_options: OctNov::request_opts
+        ) -> OctNov::Order
+
+        def retrieve: (
+          Integer order_id,
+          ?request_options: OctNov::request_opts
+        ) -> OctNov::Order
+
+        def delete: (
+          Integer order_id,
+          ?request_options: OctNov::request_opts
+        ) -> nil
+
+        def initialize: (client: OctNov::Client) -> void
+      end
+    end
+  end
+end

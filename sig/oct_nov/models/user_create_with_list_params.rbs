@@ -1,0 +1,26 @@
+module OctNov
+  module Models
+    type user_create_with_list_params =
+      { items: ::Array[OctNov::User] }
+      & OctNov::Internal::Type::request_parameters
+
+    class UserCreateWithListParams < OctNov::Internal::Type::BaseModel
+      extend OctNov::Internal::Type::RequestParameters::Converter
+      include OctNov::Internal::Type::RequestParameters
+
+      attr_reader items: ::Array[OctNov::User]?
+
+      def items=: (::Array[OctNov::User]) -> ::Array[OctNov::User]
+
+      def initialize: (
+        ?items: ::Array[OctNov::User],
+        ?request_options: OctNov::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        items: ::Array[OctNov::User],
+        request_options: OctNov::RequestOptions
+      }
+    end
+  end
+end
