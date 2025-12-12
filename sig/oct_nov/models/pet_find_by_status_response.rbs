@@ -1,0 +1,7 @@
+module OctNov
+  module Models
+    type pet_find_by_status_response = ::Array[OctNov::Pet]
+
+    PetFindByStatusResponse: OctNov::Internal::Type::Converter
+  end
+end

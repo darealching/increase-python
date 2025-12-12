@@ -1,0 +1,43 @@
+module OctNov
+  class Category = OctNov::Models::Category
+
+  class Order = OctNov::Models::Order
+
+  class Pet = OctNov::Models::Pet
+
+  class PetCreateParams = OctNov::Models::PetCreateParams
+
+  class PetDeleteParams = OctNov::Models::PetDeleteParams
+
+  class PetFindByStatusParams = OctNov::Models::PetFindByStatusParams
+
+  class PetFindByTagsParams = OctNov::Models::PetFindByTagsParams
+
+  class PetRetrieveParams = OctNov::Models::PetRetrieveParams
+
+  class PetUpdateByIDParams = OctNov::Models::PetUpdateByIDParams
+
+  class PetUpdateParams = OctNov::Models::PetUpdateParams
+
+  class PetUploadImageParams = OctNov::Models::PetUploadImageParams
+
+  module Store = OctNov::Models::Store
+
+  class StoreListInventoryParams = OctNov::Models::StoreListInventoryParams
+
+  class User = OctNov::Models::User
+
+  class UserCreateParams = OctNov::Models::UserCreateParams
+
+  class UserCreateWithListParams = OctNov::Models::UserCreateWithListParams
+
+  class UserDeleteParams = OctNov::Models::UserDeleteParams
+
+  class UserLoginParams = OctNov::Models::UserLoginParams
+
+  class UserLogoutParams = OctNov::Models::UserLogoutParams
+
+  class UserRetrieveParams = OctNov::Models::UserRetrieveParams
+
+  class UserUpdateParams = OctNov::Models::UserUpdateParams
+end

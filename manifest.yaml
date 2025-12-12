@@ -1,0 +1,16 @@
+dependencies:
+  - English
+  - cgi
+  - date
+  - erb
+  - etc
+  - json
+  - net/http
+  - openssl
+  - pathname
+  - rbconfig
+  - securerandom
+  - set
+  - stringio
+  - time
+  - uri

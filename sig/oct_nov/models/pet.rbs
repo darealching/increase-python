@@ -1,0 +1,81 @@
+module OctNov
+  module Models
+    type pet =
+      {
+        name: String,
+        photo_urls: ::Array[String],
+        id: Integer,
+        category: OctNov::Category,
+        status: OctNov::Models::Pet::status,
+        tags: ::Array[OctNov::Pet::Tag]
+      }
+
+    class Pet < OctNov::Internal::Type::BaseModel
+      attr_accessor name: String
+
+      attr_accessor photo_urls: ::Array[String]
+
+      attr_reader id: Integer?
+
+      def id=: (Integer) -> Integer
+
+      attr_reader category: OctNov::Category?
+
+      def category=: (OctNov::Category) -> OctNov::Category
+
+      attr_reader status: OctNov::Models::Pet::status?
+
+      def status=: (OctNov::Models::Pet::status) -> OctNov::Models::Pet::status
+
+      attr_reader tags: ::Array[OctNov::Pet::Tag]?
+
+      def tags=: (::Array[OctNov::Pet::Tag]) -> ::Array[OctNov::Pet::Tag]
+
+      def initialize: (
+        name: String,
+        photo_urls: ::Array[String],
+        ?id: Integer,
+        ?category: OctNov::Category,
+        ?status: OctNov::Models::Pet::status,
+        ?tags: ::Array[OctNov::Pet::Tag]
+      ) -> void
+
+      def to_hash: -> {
+        name: String,
+        photo_urls: ::Array[String],
+        id: Integer,
+        category: OctNov::Category,
+        status: OctNov::Models::Pet::status,
+        tags: ::Array[OctNov::Pet::Tag]
+      }
+
+      type status = :available | :pending | :sold
+
+      module Status
+        extend OctNov::Internal::Type::Enum
+
+        AVAILABLE: :available
+        PENDING: :pending
+        SOLD: :sold
+
+        def self?.values: -> ::Array[OctNov::Models::Pet::status]
+      end
+
+      type tag = { id: Integer, name: String }
+
+      class Tag < OctNov::Internal::Type::BaseModel
+        attr_reader id: Integer?
+
+        def id=: (Integer) -> Integer
+
+        attr_reader name: String?
+
+        def name=: (String) -> String
+
+        def initialize: (?id: Integer, ?name: String) -> void
+
+        def to_hash: -> { id: Integer, name: String }
+      end
+    end
+  end
+end

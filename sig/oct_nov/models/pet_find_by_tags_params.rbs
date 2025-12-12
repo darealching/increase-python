@@ -1,0 +1,25 @@
+module OctNov
+  module Models
+    type pet_find_by_tags_params =
+      { tags: ::Array[String] } & OctNov::Internal::Type::request_parameters
+
+    class PetFindByTagsParams < OctNov::Internal::Type::BaseModel
+      extend OctNov::Internal::Type::RequestParameters::Converter
+      include OctNov::Internal::Type::RequestParameters
+
+      attr_reader tags: ::Array[String]?
+
+      def tags=: (::Array[String]) -> ::Array[String]
+
+      def initialize: (
+        ?tags: ::Array[String],
+        ?request_options: OctNov::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        tags: ::Array[String],
+        request_options: OctNov::RequestOptions
+      }
+    end
+  end
+end

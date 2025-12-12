@@ -1,0 +1,32 @@
+module OctNov
+  module Models
+    type user_login_params =
+      { password: String, username: String }
+      & OctNov::Internal::Type::request_parameters
+
+    class UserLoginParams < OctNov::Internal::Type::BaseModel
+      extend OctNov::Internal::Type::RequestParameters::Converter
+      include OctNov::Internal::Type::RequestParameters
+
+      attr_reader password: String?
+
+      def password=: (String) -> String
+
+      attr_reader username: String?
+
+      def username=: (String) -> String
+
+      def initialize: (
+        ?password: String,
+        ?username: String,
+        ?request_options: OctNov::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        password: String,
+        username: String,
+        request_options: OctNov::RequestOptions
+      }
+    end
+  end
+end

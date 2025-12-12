@@ -1,0 +1,13 @@
+module OctNov
+  module Resources
+    class Store
+      attr_reader orders: OctNov::Resources::Store::Orders
+
+      def list_inventory: (
+        ?request_options: OctNov::request_opts
+      ) -> OctNov::Models::store_list_inventory_response
+
+      def initialize: (client: OctNov::Client) -> void
+    end
+  end
+end
