@@ -172,7 +172,7 @@ module OctNov
       #
       # @param pet_id [Integer] Path param: ID of pet to update
       #
-      # @param image [Pathname, StringIO, IO, String, OctNov::FilePart] Body param:
+      # @param image [Pathname, StringIO, IO, String, OctNov::FilePart] Body param
       #
       # @param additional_metadata [String] Query param: Additional Metadata
       #

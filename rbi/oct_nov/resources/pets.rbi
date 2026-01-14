@@ -140,7 +140,7 @@ module OctNov
       def upload_image(
         # Path param: ID of pet to update
         pet_id,
-        # Body param:
+        # Body param
         image:,
         # Query param: Additional Metadata
         additional_metadata: nil,
