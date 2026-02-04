@@ -43,13 +43,13 @@ If you’d like to use the repository from source, you can either install from g
 To install via git in your `Gemfile`:
 
 ```ruby
-gem "oct-nov", git: "https://www.github.com/darealching/increase-python"
+gem "oct-nov", git: "https://github.com/darealching/increase-python"
 ```
 
 Alternatively, reference local copy of the repo:
 
 ```bash
-$ git clone -- 'https://www.github.com/darealching/increase-python' '<path-to-repo>'
+$ git clone -- 'https://github.com/darealching/increase-python' '<path-to-repo>'
 ```
 
 ```ruby
