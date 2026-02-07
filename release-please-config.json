@@ -59,8 +59,12 @@
       "hidden": true
     }
   ],
-  "release-type": "python",
+  "release-type": "ruby",
+  "version-file": "lib/oct_nov/version.rb",
   "extra-files": [
-    "src/increase/_version.py"
+    {
+      "type": "ruby-readme",
+      "path": "README.md"
+    }
   ]
 }

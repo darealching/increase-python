@@ -1,0 +1,9 @@
+module OctNov
+  module Internal
+    extend OctNov::Internal::Util::SorbetRuntimeSupport
+
+    type file_input = Pathname | StringIO | IO | String | OctNov::FilePart
+
+    OMIT: Object
+  end
+end

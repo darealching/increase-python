@@ -1,0 +1,26 @@
+module OctNov
+  module Internal
+    module Type
+      class Unknown
+        extend OctNov::Internal::Type::Converter
+        extend OctNov::Internal::Util::SorbetRuntimeSupport
+
+        def self.===: (top other) -> bool
+
+        def self.==: (top other) -> bool
+
+        def self.coerce: (
+          top value,
+          state: OctNov::Internal::Type::Converter::coerce_state
+        ) -> top
+
+        def self.dump: (
+          top value,
+          state: OctNov::Internal::Type::Converter::dump_state
+        ) -> top
+
+        def self.to_sorbet_type: -> top
+      end
+    end
+  end
+end

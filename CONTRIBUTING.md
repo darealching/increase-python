@@ -1,128 +1,125 @@
 ## Setting up the environment
 
-### With Rye
+This repository contains a `.ruby-version` file, which should work with either [rbenv](https://github.com/rbenv/rbenv) or [asdf](https://github.com/asdf-vm/asdf) with the [ruby plugin](https://github.com/asdf-vm/asdf-ruby).
 
-We use [Rye](https://rye.astral.sh/) to manage dependencies because it will automatically provision a Python environment with the expected Python version. To set it up, run:
+Please follow the instructions for your preferred version manager to install the Ruby version specified in the `.ruby-version` file.
 
-```sh
+To set up the repository, run:
+
+```bash
 $ ./scripts/bootstrap
 ```
 
-Or [install Rye manually](https://rye.astral.sh/guide/installation/) and run:
-
-```sh
-$ rye sync --all-features
-```
-
-You can then run scripts using `rye run python script.py` or by activating the virtual environment:
-
-```sh
-# Activate the virtual environment - https://docs.python.org/3/library/venv.html#how-venvs-work
-$ source .venv/bin/activate
-
-# now you can omit the `rye run` prefix
-$ python script.py
-```
-
-### Without Rye
-
-Alternatively if you don't want to install `Rye`, you can stick with the standard `pip` setup by ensuring you have the Python version specified in `.python-version`, create a virtual environment however you desire and then install dependencies using this command:
-
-```sh
-$ pip install -r requirements-dev.lock
-```
+This will install all the required dependencies.
 
 ## Modifying/Adding code
 
-Most of the SDK is generated code. Modifications to code will be persisted between generations, but may
-result in merge conflicts between manual patches and changes from the generator. The generator will never
-modify the contents of the `src/increase/lib/` and `examples/` directories.
+Most of the SDK is generated code. Modifications to code will be persisted between generations, but may result in merge conflicts between manual patches and changes from the generator. The generator will never modify the contents of `lib/oct_nov/helpers/` and `examples/` directory.
 
 ## Adding and running examples
 
 All files in the `examples/` directory are not modified by the generator and can be freely edited or added to.
 
-```py
-# add an example to examples/<your-example>.py
+```ruby
+#!/usr/bin/env ruby
+# frozen_string_literal: true
 
-#!/usr/bin/env -S rye run python
-…
+require_relative "../lib/oct_nov"
+
+# ...
 ```
 
-```sh
-$ chmod +x examples/<your-example>.py
+```bash
+$ chmod +x './examples/<your-example>.rb'
+
 # run the example against your api
-$ ./examples/<your-example>.py
+$ ruby './examples/<your-example>.rb'
 ```
 
 ## Using the repository from source
 
-If you’d like to use the repository from source, you can either install from git or link to a cloned repository:
+If you’d like to use the repository from source, you can either install from git or reference a cloned repository:
 
-To install via git:
+To install via git in your `Gemfile`:
 
-```sh
-$ pip install git+ssh://git@github.com/Increase/increase-python.git
+```ruby
+gem "oct-nov", git: "https://github.com/darealching/increase-python"
 ```
 
-Alternatively, you can build from source and install the wheel file:
+Alternatively, reference local copy of the repo:
 
-Building this package will create two files in the `dist/` directory, a `.tar.gz` containing the source files and a `.whl` that can be used to install the package efficiently.
-
-To create a distributable version of the library, all you have to do is run this command:
-
-```sh
-$ rye build
-# or
-$ python -m build
+```bash
+$ git clone -- 'https://github.com/darealching/increase-python' '<path-to-repo>'
 ```
 
-Then to install:
+```ruby
+gem "oct-nov", path: "<path-to-repo>"
+```
 
-```sh
-$ pip install ./path-to-wheel-file.whl
+## Running commands
+
+Running `rake` by itself will show all runnable commands.
+
+```bash
+$ bundle exec rake
 ```
 
 ## Running tests
 
 Most tests require you to [set up a mock server](https://github.com/stoplightio/prism) against the OpenAPI spec to run the tests.
 
-```sh
-# you will need npm installed
+```bash
 $ npx prism mock path/to/your/openapi.yml
 ```
 
-```sh
-$ ./scripts/test
+```bash
+$ bundle exec rake test
 ```
 
 ## Linting and formatting
 
-This repository uses [ruff](https://github.com/astral-sh/ruff) and
-[black](https://github.com/psf/black) to format the code in the repository.
+This repository uses [rubocop](https://github.com/rubocop/rubocop) for linting and formatting of `*.rb` files; And [syntax_tree](https://github.com/ruby-syntax-tree/syntax_tree) is used for formatting of both `*.rbi` and `*.rbs` files.
 
-To lint:
+There are two separate type checkers supported by this library: [sorbet](https://github.com/sorbet/sorbet) and [steep](https://github.com/soutaro/steep) are used for verifying `*.rbi` and `*.rbs` files respectively.
 
-```sh
-$ ./scripts/lint
+To lint and typecheck:
+
+```bash
+$ bundle exec rake lint
 ```
 
-To format and fix all ruff issues automatically:
+To format and fix all lint issues automatically:
 
-```sh
-$ ./scripts/format
+```bash
+$ bundle exec rake format
 ```
 
-## Publishing and releases
+## Editor Support
 
-Changes made to this repository via the automated release PR pipeline should publish to PyPI automatically. If
-the changes aren't made through the automated pipeline, you may want to make releases manually.
+### Ruby LSP
 
-### Publish with a GitHub workflow
+[Ruby LSP](https://github.com/Shopify/ruby-lsp) has quite good support for go to definition, but not auto-completion.
 
-You can release to package managers by using [the `Publish PyPI` GitHub action](https://www.github.com/Increase/increase-python/actions/workflows/publish-pypi.yml). This requires a setup organization or repository secret to be set up.
+This can be installed along side Solargraph.
 
-### Publish manually
+### Solargraph
 
-If you need to manually release a package, you can run the `bin/publish-pypi` script with a `PYPI_TOKEN` set on
-the environment.
+[Solargraph](https://solargraph.org) has quite good support for auto-completion, but not go to definition.
+
+This can be installed along side Ruby LSP.
+
+### Sorbet
+
+[Sorbet](https://sorbet.org) should mostly work out of the box when editing this library directly. However, there are a some caveats due to the colocation of `*.rb` and `*.rbi` files in the same project. These issues should not otherwise manifest when this library is used as a dependency.
+
+1. For go to definition usages, sorbet might get confused and may not always navigate to the correct location.
+
+2. For each generic type in `*.rbi` files, a spurious "Duplicate type member" error is present.
+
+## Documentation Preview
+
+To preview the documentation, run:
+
+```bash
+$ bundle exec rake docs:preview [PORT=8808]
+```

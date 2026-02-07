@@ -1,0 +1,55 @@
+module OctNov
+  module Resources
+    class Users
+      def create: (
+        ?id: Integer,
+        ?email: String,
+        ?first_name: String,
+        ?last_name: String,
+        ?password: String,
+        ?phone: String,
+        ?username: String,
+        ?user_status: Integer,
+        ?request_options: OctNov::request_opts
+      ) -> OctNov::User
+
+      def retrieve: (
+        String username,
+        ?request_options: OctNov::request_opts
+      ) -> OctNov::User
+
+      def update: (
+        String existing_username,
+        ?id: Integer,
+        ?email: String,
+        ?first_name: String,
+        ?last_name: String,
+        ?password: String,
+        ?phone: String,
+        ?username: String,
+        ?user_status: Integer,
+        ?request_options: OctNov::request_opts
+      ) -> nil
+
+      def delete: (
+        String username,
+        ?request_options: OctNov::request_opts
+      ) -> nil
+
+      def create_with_list: (
+        ?items: ::Array[OctNov::User],
+        ?request_options: OctNov::request_opts
+      ) -> OctNov::User
+
+      def login: (
+        ?password: String,
+        ?username: String,
+        ?request_options: OctNov::request_opts
+      ) -> String
+
+      def logout: (?request_options: OctNov::request_opts) -> nil
+
+      def initialize: (client: OctNov::Client) -> void
+    end
+  end
+end

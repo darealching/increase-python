@@ -1,0 +1,3 @@
+module OctNov
+  VERSION: String
+end
